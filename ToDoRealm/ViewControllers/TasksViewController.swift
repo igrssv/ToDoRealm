@@ -22,11 +22,15 @@ class TasksViewController: UITableViewController {
         
         title = tasksList.name
         
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createAlert))
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                            target: self,
+                                            action: #selector(addButtonPresset))
         navigationItem.rightBarButtonItem = addButtonItem
 
     }
-
+    @objc private func addButtonPresset() {
+        showAlert()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +68,9 @@ class TasksViewController: UITableViewController {
         }
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, isDone in
-            self.editAlert(task, and: indexPath)
+            self.showAlert(task: task) {
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
             isDone(true)
         }
         
@@ -88,52 +94,26 @@ class TasksViewController: UITableViewController {
 
 //MARK: - Alert
     
-    @objc private func createAlert() {
-        let alert = UIAlertController(title: "Add task", message: "New task", preferredStyle: .alert)
-        alert.addTextField()
-        alert.addTextField()
+    private func showAlert(task: Task? = nil, complection: (() -> Void)? = nil) {
+        let titel = task == nil ? "New task" : "Edit task"
         
+        let alert = UIAlertController.createAlert(titel, andMessage: "Please set title and note for new task")
         
-        let alertAction = UIAlertAction(title: "Save", style: .default) { _ in
-            guard let newValue = alert.textFields?.first?.text else { return }
-            print(newValue)
-            guard let note = alert.textFields?.last?.text else { return }
-            
-            let task = Task(value: [newValue, note])
-            StorageManager.shared.save(task, and: self.tasksList)
-            
-            let indexPath = IndexPath(row: self.currentTask.index(of: task) ?? 0, section: 0)
-            self.tableView.insertRows(at: [indexPath], with: .automatic)
+        alert.createActionAlert(task: task) { newTask, note in
+            if let task = task, let complection = complection {
+                StorageManager.shared.edit(task, newName: newTask, newNote: note)
+                complection()
+            } else {
+                self.save(name: newTask, note: note)
+            }
         }
-        let cancelAlert = UIAlertAction(title: "Cancel", style: .destructive)
-        
-        alert.addAction(alertAction)
-        alert.addAction(cancelAlert)
         present(alert, animated: true)
     }
     
-    
-    private func editAlert(_ task: Task, and indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Edit", message: "You edit task?", preferredStyle: .alert)
-        alert.addTextField { oldName in
-            oldName.text = task.name
-        }
-        alert.addTextField { oldValue in
-            oldValue.text = task.note
-        }
-        let alertAction = UIAlertAction(title: "Save", style: .default) { _ in
-            guard let newName = alert.textFields?.first?.text else { return }
-            guard let newNote = alert.textFields?.last?.text else { return }
-            StorageManager.shared.edit(task, newName: newName, newNote: newNote)
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-        
-        alert.addAction(alertAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
+    private func save(name: String, note: String) {
+        let task = Task(value: [name, note])
+        StorageManager.shared.save(task, and: self.tasksList)
+        let rowIndex = IndexPath(row: self.currentTask.index(of: task) ?? 0, section: 0)
+        tableView.insertRows(at: [rowIndex], with: .automatic)
     }
-    
-
 }

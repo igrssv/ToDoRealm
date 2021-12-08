@@ -11,6 +11,7 @@
 		8E6AB3992757FC6E0027D4F1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AB3982757FC6E0027D4F1 /* Task.swift */; };
 		8E6AB39C2757FD590027D4F1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AB39B2757FD590027D4F1 /* DataManager.swift */; };
 		8E6AB39E275801EA0027D4F1 /* StorageManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AB39D275801EA0027D4F1 /* StorageManeger.swift */; };
+		8E73FBF927612D5200996249 /* Extension + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73FBF827612D5200996249 /* Extension + UIAlertController.swift */; };
 		8EA2E0AA2757EE2A007B6BE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2E0A92757EE2A007B6BE8 /* AppDelegate.swift */; };
 		8EA2E0AC2757EE2A007B6BE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2E0AB2757EE2A007B6BE8 /* SceneDelegate.swift */; };
 		8EA2E0B12757EE2A007B6BE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA2E0AF2757EE2A007B6BE8 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		8E6AB3982757FC6E0027D4F1 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		8E6AB39B2757FD590027D4F1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8E6AB39D275801EA0027D4F1 /* StorageManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManeger.swift; sourceTree = "<group>"; };
+		8E73FBF827612D5200996249 /* Extension + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIAlertController.swift"; sourceTree = "<group>"; };
 		8EA2E0A62757EE2A007B6BE8 /* ToDoRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA2E0A92757EE2A007B6BE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EA2E0AB2757EE2A007B6BE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				8EA2E0C02757EF72007B6BE8 /* TaskListViewController.swift */,
 				8EA2E0C32757EF92007B6BE8 /* TasksViewController.swift */,
+				8E73FBF827612D5200996249 /* Extension + UIAlertController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E73FBF927612D5200996249 /* Extension + UIAlertController.swift in Sources */,
 				8E6AB3992757FC6E0027D4F1 /* Task.swift in Sources */,
 				8E6AB39C2757FD590027D4F1 /* DataManager.swift in Sources */,
 				8EA2E0AA2757EE2A007B6BE8 /* AppDelegate.swift in Sources */,

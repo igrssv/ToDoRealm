@@ -8,18 +8,16 @@
 import UIKit
 import RealmSwift
 
-
-
 class TaskListViewController: UITableViewController {
     private var tasksLists: Results<TaskList>!
     
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Task List"
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                               target: self,
+                                               action: #selector(addButtonPressed))
         navigationItem.rightBarButtonItem = addBarButtonItem
         
         createTempData()
@@ -28,11 +26,9 @@ class TaskListViewController: UITableViewController {
 
     }
     
-    
 
-    
     @objc func addButtonPressed() {
-        createAlert()
+        showAlert()
     }
     
     private func createTempData() {
@@ -73,7 +69,9 @@ class TaskListViewController: UITableViewController {
         }
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, isDone in
-            self.editAlert(taskList, indexPath: indexPath)
+            self.showAlert(taskList) {
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
             isDone(true)
         }
         
@@ -100,44 +98,33 @@ class TaskListViewController: UITableViewController {
         tasksVC.tasksList = tasklist
     }
 
-    //MARK: Aletr
 
-    private func createAlert() {
-        let alert = UIAlertController(title: "Add", message: "Add new task list", preferredStyle: .alert)
-        alert.addTextField()
-        let alertAction = UIAlertAction(title: "Save", style: .default) { _ in
-            guard let newValue = alert.textFields?.first?.text else { return }
-            let tasklist = TaskList(value: [newValue])
-            StorageManager.shared.save(tasklist)
-            let indexPath = IndexPath(row: self.tasksLists.index(of: tasklist ) ?? 0, section: 0)
-            self.tableView.insertRows(at: [indexPath], with: .automatic)
-            
+    
+//MARK: - Alert
+    private func showAlert(_ taskList: TaskList? = nil, completion: (() -> Void)? = nil) {
+        let titel = taskList != nil ? "Edit List" : "New List"
+        
+        let alert = UIAlertController.createAlert(titel, andMessage: "Please set title for new task list")
+        
+        alert.createActionAlert(taskList: taskList) { newValue in
+            if let taskList = taskList, let completion = completion {
+                StorageManager.shared.edit(taskList, newValue: newValue)
+                completion()
+            } else {
+                self.save(taskList: newValue)
+            }
         }
-        let cancelActionAlert = UIAlertAction(title: "Cancel", style: .destructive)
-        alert.addAction(alertAction)
-        alert.addAction(cancelActionAlert)
+        
         present(alert, animated: true)
     }
     
-    private func editAlert(_ taskList: TaskList, indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Edit", message: "You edit task list?", preferredStyle: .alert)
-        alert.addTextField { oldValue in
-            oldValue.text = taskList.name
-        }
-        let alertAction = UIAlertAction(title: "Save", style: .default) { _ in
-            guard let newValue = alert.textFields?.first?.text else { return }
-            StorageManager.shared.edit(taskList, newValue: newValue)
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
-        let cancelActionAlert = UIAlertAction(title: "Cancel", style: .destructive)
-        alert.addAction(alertAction)
-        alert.addAction(cancelActionAlert)
-        present(alert, animated: true)
+    private func save(taskList: String) {
+        let tasklist = TaskList(value: [taskList])
+        StorageManager.shared.save(tasklist)
+        let indexPath = IndexPath(row: tasksLists.index(of: tasklist ) ?? 0, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
         
     }
-    
-    
-    
 }
 
 
