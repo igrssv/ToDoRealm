@@ -25,7 +25,9 @@ class TasksViewController: UITableViewController {
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                             target: self,
                                             action: #selector(addButtonPresset))
+        
         navigationItem.rightBarButtonItem = addButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
 
     }
     @objc private func addButtonPresset() {

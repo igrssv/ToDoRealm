@@ -15,15 +15,23 @@ class TaskListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Task List"
+        
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                target: self,
                                                action: #selector(addButtonPressed))
+        
         navigationItem.rightBarButtonItem = addBarButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
         
         createTempData()
         
         tasksLists = StorageManager.shared.realm.objects(TaskList.self)
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
 
