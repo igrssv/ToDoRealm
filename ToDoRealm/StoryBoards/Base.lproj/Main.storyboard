@@ -15,9 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Jer-Ta-iSJ">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Date"/>
+                                <segment title="A-Z"/>
+                            </segments>
+                        </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskListCell" textLabel="SgT-8u-sgm" detailTextLabel="0G5-GS-Upn" style="IBUITableViewCellStyleValue1" id="C6A-f7-owR">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="76.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C6A-f7-owR" id="RJn-Nc-Tob">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -40,7 +48,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="tmo-qA-JsB" kind="show" id="KSS-bR-SLE"/>
+                                    <segue destination="tmo-qA-JsB" kind="show" identifier="taskSegue" id="ZYM-SQ-EyW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -49,7 +57,9 @@
                             <outlet property="delegate" destination="8qC-lp-1ZP" id="lSN-gY-crK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Gu2-ph-MXm"/>
+                    <navigationItem key="navigationItem" id="Gu2-ph-MXm">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="m8L-0D-m32"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owu-d2-jo7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -14,8 +14,7 @@ class DataManager {
     
     func createTempData(_ complection: @escaping() -> Void) {
         if !UserDefaults.standard.bool(forKey: "done") {
-            
-            
+
             let shoppingList = TaskList()
             shoppingList.name = "Shopping List"
             
@@ -26,6 +25,7 @@ class DataManager {
             shoppingList.tasks.insert(contentsOf: [appels, orages, beer], at: 0)
             
             let filmsList = TaskList()
+            filmsList.name = "Film List"
             
             let comicsFilm = Task(value: ["Spider-Man", "Sam Raimy"])
             let series = Task(value: ["name": "Silicon Vally","note": "F#ck Gavin Balson!", "isComplected": true])
