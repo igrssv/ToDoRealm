@@ -10,7 +10,6 @@ import RealmSwift
 
 class TaskListViewController: UITableViewController {
     private var tasksLists: Results<TaskList>!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +33,6 @@ class TaskListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-
     @objc func addButtonPressed() {
         showAlert()
     }
@@ -45,7 +43,7 @@ class TaskListViewController: UITableViewController {
         }
     }
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tasksLists.count
@@ -56,16 +54,9 @@ class TaskListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListCell", for: indexPath)
         
         let taskList = tasksLists[indexPath.row]
-        
-        var content = cell.defaultContentConfiguration()
-        content.text = taskList.name
-        content.secondaryText = "\(taskList.tasks.filter("isComplected = false").count)"
-        print("\(taskList.tasks)")
-        cell.contentConfiguration = content
-    
+        cell.configurate(taskList)
 
         return cell
-   
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
