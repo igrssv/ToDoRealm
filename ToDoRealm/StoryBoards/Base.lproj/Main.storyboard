@@ -22,6 +22,9 @@
                                 <segment title="Date"/>
                                 <segment title="A-Z"/>
                             </segments>
+                            <connections>
+                                <action selector="sortedSegmentControl:" destination="8qC-lp-1ZP" eventType="valueChanged" id="m4K-81-1D4"/>
+                            </connections>
                         </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskListCell" textLabel="SgT-8u-sgm" detailTextLabel="0G5-GS-Upn" style="IBUITableViewCellStyleValue1" id="C6A-f7-owR">

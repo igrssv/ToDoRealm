@@ -27,8 +27,6 @@ class TasksViewController: UITableViewController {
                                             action: #selector(addButtonPresset))
         
         navigationItem.rightBarButtonItem = addButtonItem
-        navigationItem.leftBarButtonItem = editButtonItem
-
     }
     @objc private func addButtonPresset() {
         showAlert()

@@ -42,7 +42,15 @@ class TaskListViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-
+    
+    
+    @IBAction func sortedSegmentControl(_ sender: UISegmentedControl) {
+        tasksLists = sender.selectedSegmentIndex == 0
+            ? tasksLists.sorted(byKeyPath: "date")
+            : tasksLists.sorted(byKeyPath: "name")
+        tableView.reloadData()
+    }
+    
 // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,13 +84,11 @@ class TaskListViewController: UITableViewController {
         
         let doneAction = UIContextualAction(style: .normal, title: "Done") { _, _, isDone in
             StorageManager.shared.done(taskList)
-            
-
-            
             tableView.reloadRows(at: [indexPath], with: .automatic)
             isDone(true)
         }
         editAction.backgroundColor = .orange
+        doneAction.backgroundColor = .green
         return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
     }
     

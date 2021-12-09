@@ -21,7 +21,7 @@ extension UITableViewCell {
             content.secondaryText = nil
             accessoryType = .checkmark
         } else {
-            content.secondaryText = "\(tasklist.tasks.count)"
+            content.secondaryText = "\(currentTaskList.count)"
         }
         contentConfiguration = content
     }
